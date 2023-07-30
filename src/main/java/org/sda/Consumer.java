@@ -15,8 +15,8 @@ public class Consumer implements Runnable {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
+                String message = queue.take();
                 if (rateLimiter.acquire()) {
-                    String message = queue.take();
                     System.out.println(message);
                 } else {
                     //отбрасываем сообщения сверх лимита
