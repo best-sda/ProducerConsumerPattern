@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class Producer implements Runnable {
     private final BlockingQueue<String> queue;
-    private RateLimiter rateLimiter;
+    private final RateLimiter rateLimiter;
 
     public Producer(BlockingQueue<String> queue, RateLimiter rateLimiter) {
         this.queue = queue;
@@ -18,7 +18,7 @@ public class Producer implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
                 try {
                     if (rateLimiter.acquire()) {
-                        String message = UUID.randomUUID() + " " + LocalTime.now().toString();
+                        String message = UUID.randomUUID() + " " + LocalTime.now();
                         queue.put(message);
                     } else {
                         //отбрасываем сообщения сверх лимита

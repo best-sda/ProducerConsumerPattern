@@ -9,7 +9,7 @@ public class RateLimiter implements IRateLimiter {
     private long nextPermitTime;
     private int permits;
 
-    private Clock clock;
+    private final Clock clock;
 
     public RateLimiter(int maxPermits, long period, Clock clock) {
         this.maxPermits = maxPermits;
